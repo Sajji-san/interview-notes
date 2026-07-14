@@ -6,6 +6,7 @@ from pathlib import Path
 
 from interview_notes.cli import main
 from interview_notes.models import Note, ProjectState, Task
+from interview_notes.cli import demo_state
 from interview_notes.storage import load_state, save_state
 
 
@@ -36,6 +37,12 @@ class ProjectSmokeTests(unittest.TestCase):
             loaded = load_state(path)
 
         self.assertEqual(loaded.notes[0].title, "Saved")
+
+    def test_demo_state_has_records(self) -> None:
+        state = demo_state()
+
+        self.assertGreaterEqual(len(state.notes), 1)
+        self.assertGreaterEqual(len(state.tasks), 1)
 
 
 if __name__ == "__main__":
